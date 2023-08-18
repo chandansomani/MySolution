@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.HttpOverrides;
+using MyAPI.Extensions;
+using NLog;
+
 namespace MyAPI
 {
     public class Program
@@ -5,6 +9,12 @@ namespace MyAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+                        
+            LogManager.Setup().LoadConfigurationFromFile(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
+
+            builder.Services.ConfigureCors();
+            builder.Services.ConfigureIISIntegration();
+            builder.Services.ConfigureLoggerService();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -21,6 +31,13 @@ namespace MyAPI
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.All
+            });
+
+            app.UseCors("CorsPolicy");
 
             app.UseRouting();
 

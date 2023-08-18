@@ -7,8 +7,10 @@ namespace MyAPI.Models
         [Key]
         public int ID { get; set; }
         [MaxLength(10)]
-        public string BType { get; set; }
+        public string BType { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Invoice Date Required")]
         public DateOnly Date { get; set; }
+        [Required(ErrorMessage = "Invoice Number Required")]
         public int BNo { get; set; }
         public decimal Amount { get; set; }
         public decimal CreditAmt { get; set; }
