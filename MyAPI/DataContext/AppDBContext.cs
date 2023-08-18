@@ -13,6 +13,6 @@ namespace MyAPI.DataContext
 
         }
 
-        public DbSet<DSR> dSRs { get; set; }
+        public DbSet<DSR> DSRs { get; set; }
     }
 }
