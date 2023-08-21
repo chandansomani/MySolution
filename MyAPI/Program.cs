@@ -11,7 +11,7 @@ namespace MyAPI
 
             builder.Services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlServer(
-                            builder.Services.Configuration.GetConnectionString("DefaultConnection")
+                            builder.Configuration.GetConnectionString("DefaultConnection")
                         )
                     );
 
