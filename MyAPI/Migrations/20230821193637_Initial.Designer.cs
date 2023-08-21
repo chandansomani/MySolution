@@ -11,8 +11,8 @@ using MyAPI.Data;
 namespace MyAPI.Migrations
 {
     [DbContext(typeof(MyAPIContext))]
-    [Migration("20230821163220_AddedCustFK2Inv2")]
-    partial class AddedCustFK2Inv2
+    [Migration("20230821193637_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,24 @@ namespace MyAPI.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Customer");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Name = "Mangesh Shinde",
+                            OpeningBalance = 1000m,
+                            Phone = "9998887773",
+                            Place = "Latur"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Name = "Ninad P",
+                            OpeningBalance = 2000m,
+                            Phone = "9997776662",
+                            Place = "Nagar"
+                        });
                 });
 
             modelBuilder.Entity("MyAPI.Models.Invoice", b =>
@@ -69,7 +87,7 @@ namespace MyAPI.Migrations
                     b.Property<decimal>("CredfitAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("CustomerID")
+                    b.Property<int>("CustID")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -87,20 +105,7 @@ namespace MyAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerID");
-
                     b.ToTable("Invoice");
-                });
-
-            modelBuilder.Entity("MyAPI.Models.Invoice", b =>
-                {
-                    b.HasOne("MyAPI.Models.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
                 });
 #pragma warning restore 612, 618
         }

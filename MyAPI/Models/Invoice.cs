@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace MyAPI.Models
 {
@@ -6,6 +8,7 @@ namespace MyAPI.Models
     {
         [Key]
         public int Id { get; set; }
+        [EnumDataType(typeof(InvoiceType))]
         public InvoiceType InType { get; set; } = InvoiceType.Other;
         public int Number { get; set; }
         public string Description { get; set; } = string.Empty;
@@ -13,9 +16,10 @@ namespace MyAPI.Models
         public decimal CredfitAmount { get; set; }
         public decimal UPIAmount { get; set; }
         public decimal CashAmount { get; set; }
-        public Customer Customer { get; set; } = new Customer();
+        public int CustID { get; set; }
     }
 
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum InvoiceType
     {
         Other = 0,

@@ -17,5 +17,20 @@ namespace MyAPI.Data
         public DbSet<MyAPI.Models.Customer> Customer { get; set; } = default!;
 
         public DbSet<MyAPI.Models.Invoice> Invoice { get; set; } = default!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            //modelBuilder.Entity<Invoice>()
+            //    .HasOne(i => i.Customer)
+            //    .WithMany()
+            //    .HasForeignKey(i => i.CustID) // Specify foreign key property
+            //    .HasPrincipalKey(c => c.ID); // Specify corresponding principal key property
+                
+            // You can add more configurations here if needed
+
+            SeedClass.Seed(modelBuilder);
+        }
     }
 }
