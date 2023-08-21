@@ -1,3 +1,6 @@
+using MyAPI.DataContext;
+using Microsoft.EntityFrameworkCore;
+
 namespace MyAPI
 {
     public class Program
@@ -5,6 +8,12 @@ namespace MyAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                    options.UseSqlServer(
+                            builder.Services.Configuration.GetConnectionString("DefaultConnection")
+                        )
+                    );
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
