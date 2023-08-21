@@ -4,15 +4,12 @@ using MyAPI.Models;
 namespace MyAPI.DataContext
 {
     public class AppDBContext : DbContext
-    {
-        private readonly DbContext _context;
-        public AppDBContext(DbContext context)
+    {     
+        public AppDBContext(DbContextOptions<AppDBContext> context) : base(context)
         {
-
-            _context = context;
-
+           
         }
-
         public DbSet<DSR> DSRs { get; set; }
+
     }
 }

@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.EntityFrameworkCore;
+using MyAPI.Controllers;
+using MyAPI.DataContext;
 using MyAPI.Extensions;
 using NLog;
 
@@ -8,13 +11,17 @@ namespace MyAPI
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            var builder = WebApplication.CreateBuilder(args);            
                         
             LogManager.Setup().LoadConfigurationFromFile(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
             builder.Services.ConfigureCors();
             builder.Services.ConfigureIISIntegration();
             builder.Services.ConfigureLoggerService();
+
+            builder.Services.AddDbContext<AppDBContext>(
+                    op => op.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+                );
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
