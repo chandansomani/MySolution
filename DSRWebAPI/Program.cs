@@ -1,4 +1,10 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using DSRWebAPI.Data;
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<DSRWebAPIContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DSRWebAPIContext") ?? throw new InvalidOperationException("Connection string 'DSRWebAPIContext' not found.")));
 
 // Add services to the container.
 
