@@ -1,7 +1,10 @@
-﻿namespace MyAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MyAPI.Models
 {
     public class Customer
     {
+        [Key]
         public int ID { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Place { get; set; } = string.Empty;
