@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using MyAPI.Helpers;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace MyAPI.Models
 {
+    [Invoice_Validator]
     public class Invoice
     {
         [Key]
@@ -13,7 +14,7 @@ namespace MyAPI.Models
         public int Number { get; set; }
         public string Description { get; set; } = string.Empty;
         public decimal Amount { get; set; } 
-        public decimal CredfitAmount { get; set; }
+        public decimal CreditAmount { get; set; }
         public decimal UPIAmount { get; set; }
         public decimal CashAmount { get; set; }
         public int CustID { get; set; }

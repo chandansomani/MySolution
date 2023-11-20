@@ -59,6 +59,7 @@ namespace MyAPI.Controllers
             {
                 return BadRequest();
             }
+            customer.ToString().Substring(4).ToString().ToLower();
 
             _context.Entry(customer).State = EntityState.Modified;
 

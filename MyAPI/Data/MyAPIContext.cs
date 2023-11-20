@@ -14,9 +14,9 @@ namespace MyAPI.Data
         {
         }
 
-        public DbSet<MyAPI.Models.Customer> Customer { get; set; } = default!;
+        public DbSet<Customer> Customer { get; set; } = default!;
 
-        public DbSet<MyAPI.Models.Invoice> Invoice { get; set; } = default!;
+        public DbSet<Invoice> Invoice { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,5 +32,10 @@ namespace MyAPI.Data
 
             SeedClass.Seed(modelBuilder);
         }
+
+
+
+
+
     }
 }

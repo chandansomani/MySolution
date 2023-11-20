@@ -53,7 +53,7 @@ namespace MyAPI.Controllers
         // PUT: api/Invoices/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutInvoice(int id, Invoice invoice)
+        public async Task<IActionResult> PutInvoice(int id, [FromBody] Invoice invoice)
         {
             if (id != invoice.Id)
             {
@@ -84,12 +84,13 @@ namespace MyAPI.Controllers
         // POST: api/Invoices
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Invoice>> PostInvoice(Invoice invoice)
+        public async Task<ActionResult<Invoice>> PostInvoice([FromBody] Invoice invoice)
         {
           if (_context.Invoice == null)
           {
               return Problem("Entity set 'MyAPIContext.Invoice'  is null.");
-          }
+          }        
+          
             
             _context.Invoice.Add(invoice);
             await _context.SaveChangesAsync();
